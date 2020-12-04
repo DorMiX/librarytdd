@@ -6,14 +6,14 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\Book;
 
-class BookReservationTest extends TestCase
+class BookManagementTest extends TestCase
 {
     use RefreshDatabase;
     // public function test_a_book_can_be_added_to_the_library_test() // phpunit
     /** @test */
     public function ABookCanBeAddedToTheLibrary() // Laravel
     {
-        $this->withoutExceptionHandling();
+        // $this->withoutExceptionHandling();
 
         $response = $this->post('/books', [
           'title' => 'A book title',
@@ -54,7 +54,7 @@ class BookReservationTest extends TestCase
     /** @test */
     public function ABookCanBeUpdated()
     {
-        $this->withoutExceptionHandling();
+        // $this->withoutExceptionHandling();
 
         $this->post('/books', [
           'title' => 'Title of the Book',
@@ -77,7 +77,7 @@ class BookReservationTest extends TestCase
     /** @test */
     public function ABookCanBeDeleted()
     {
-        $this->withoutExceptionHandling();
+        // $this->withoutExceptionHandling();
 
         $this->post('/books', [
           'title' => 'Title of the Book',
