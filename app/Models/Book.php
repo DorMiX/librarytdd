@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Book extends Model
 {
@@ -13,6 +14,6 @@ class Book extends Model
 
     public function path()
     {
-        return '/books' . $this->id;
+        return '/books/' . $this->id . '-' . Str::slug($this->title);
     }
 }
