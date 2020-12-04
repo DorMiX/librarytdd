@@ -20,8 +20,12 @@ class BookReservationTest extends TestCase
           'author' => 'Author of the book'
         ]);
 
-        $response->assertOK();
+        $book = Book::first();
+
+        // $response->assertOK();
         $this->assertCount(1, Book::all());
+
+        $response->assertRedirect('/books' . $book->id);
     }
     /** @test */
     public function ATitleIsRequired()
@@ -66,6 +70,26 @@ class BookReservationTest extends TestCase
 
         $this->assertEquals('New Title', Book::first()->title);
         $this->assertEquals('New Author', Book::first()->author);
+        $response->assertRedirect('/books' . $book->id);
 
+    }
+
+    /** @test */
+    public function ABookCanBeDeleted()
+    {
+        $this->withoutExceptionHandling();
+
+        $this->post('/books', [
+          'title' => 'Title of the Book',
+          'author' => 'Author'
+        ]);
+
+        $book = Book::first();
+        $this->assertCount(1, Book::all());
+
+        $response = $this->delete('/books/' . $book->id);
+
+        $this->assertCount(0, Book::all());
+        $response->assertRedirect('/books');
     }
 }
