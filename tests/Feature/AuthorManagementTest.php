@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Author;
+use Carbon\Carbon;
 
 class AuthorManagementTest extends TestCase
 {
@@ -21,6 +22,10 @@ class AuthorManagementTest extends TestCase
             'dob' => '05/19/1976'
         ]);
 
-        $this->assertCount(1, Author::all());
+        $author = Author::all();
+
+        $this->assertCount(1, $author);
+        $this->assertInstanceOf(Carbon::class, $author->first()->dob);
+        $this->assertEquals('1976/19/05', $author->first()->dob->format('Y/d/m'));
     }
 }

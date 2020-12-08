@@ -9,4 +9,11 @@ class Author extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    protected $dates = ['dob'];
+
+    public function setDobAtrribute($dob)
+    {
+        $this->atrributes['dob'] = Carbon::parse($dob);
+    }
 }
