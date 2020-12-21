@@ -12,6 +12,7 @@ use App\Models\Reservation;
 class BookCheckoutTest extends TestCase
 {
     use RefreshDatabase;
+
     /** @test
      * A basic feature test example.
      *
@@ -19,7 +20,7 @@ class BookCheckoutTest extends TestCase
      */
     public function ABookCanBeCheckedOutByASignedUser()
     {
-        $this->withoutExceptionHandling();
+        // $this->withoutExceptionHandling();
 
         $book = Book::factory()->create();
 
@@ -30,5 +31,21 @@ class BookCheckoutTest extends TestCase
         $this->assertEquals($user->id, Reservation::first()->user_id);
         $this->assertEquals($book->id, Reservation::first()->book_id);
         $this->assertEquals(now(), Reservation::first()->checked_out_at);
+    }
+
+    /** @test
+     * A basic feature test example.
+     *
+     * @return void
+     */
+    public function OnlySignedInUserCanCheckoutABook()
+    {
+        // $this->withoutExceptionHandling();
+
+        $book = Book::factory()->create();
+
+        $this->post('/checkout/'. $book->id)->assertRedirect('/login');
+
+        $this->assertCount(0, Reservation::all());
     }
 }
