@@ -116,20 +116,4 @@ class BookCheckoutTest extends TestCase
         $this->assertNull(Reservation::first()->checked_in_at);
     }
 
-    /** @test
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    // public function OnlyRealBooksCanBeCheckedOut()
-    // {
-    //     // $this->withoutExceptionHandling();
-    //
-    //     $this->actingAs($user = User::factory()->create())
-    //         ->post('/checkout/9')
-    //         ->assertStatus(404);
-    //
-    //     $this->assertCount(0, Reservation::all());
-    // }
-
 }
