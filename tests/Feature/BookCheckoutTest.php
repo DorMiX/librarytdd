@@ -73,7 +73,7 @@ class BookCheckoutTest extends TestCase
      */
     public function ABookCanBeCheckedInByASignedUser()
     {
-        $this->withoutExceptionHandling();
+        // $this->withoutExceptionHandling();
 
         $book = Book::factory()->create();
         $user = User::factory()->create();
@@ -115,5 +115,27 @@ class BookCheckoutTest extends TestCase
         $this->assertCount(1, Reservation::all());
         $this->assertNull(Reservation::first()->checked_in_at);
     }
+
+
+    /** @test
+     * A basic feature test example.
+     *
+     * @return void
+     */
+    public function A404IsThrownIfABookIsNotCheckedOutFirst()
+    {
+        // $this->withoutExceptionHandling();
+
+        $book = Book::factory()->create();
+        $user = User::factory()->create();
+
+        $this->actingAs($user)
+            ->post('/checkin/'. $book->id)
+            ->assertStatus(404);
+
+        $this->assertCount(0, Reservation::all());
+    }
+
+
 
 }
