@@ -10,11 +10,14 @@ class AuthorsController extends Controller
     //
     public function store()
     {
-        $data = request()->validate([
+        Author::create($this->validateAuthor());
+    }
+
+    protected function validateAuthor()
+    {
+        return request()->validate([
             'name' => 'required',
             'dob' => 'required',
         ]);
-
-        Author::create($data);
     }
 }

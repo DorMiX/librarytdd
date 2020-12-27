@@ -11,14 +11,14 @@ class BooksController extends Controller
     //
     public function store()
     {
-        $book = Book::create($this->validateRequest());
+        $book = Book::create($this->validateBook());
 
         return redirect($book->path());
     }
 
     public function update(Book $book)
     {
-        $book->update($this->validateRequest());
+        $book->update($this->validateBook());
 
         return redirect($book->path());
     }
@@ -33,7 +33,7 @@ class BooksController extends Controller
     /**
      * @return mixed
      */
-    public function validateRequest()
+    public function validateBook()
     {
         return request()->validate([
             'title' => 'required',
