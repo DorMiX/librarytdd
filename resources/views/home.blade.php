@@ -15,9 +15,17 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+
+                    <span id="dusk_test1"></span>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    setTimeout(() => {
+        document.getElementById('dusk_test1').innerHTML="DRobi";
+    }, 2000);
+</script>
 @endsection
